@@ -17,7 +17,9 @@ matrix:
   include:
 
     - env: TARGET=i686-pc-windows-msvc
+      os: windows
     - env: TARGET=x86_64-pc-windows-msvc
+      os: windows
 
 
   allow_failures:
@@ -26,7 +28,11 @@ matrix:
 before_install:
   - set -e
   - rustup self update
-
+  - choco install dotnetfx
+  - choco install vcredist2017
+  - choco install microsoft-build-tools 
+  - choco install visualstudio2017buildtools
+  
 install:
   - sh ci/install.sh
   - source ~/.cargo/env || true
